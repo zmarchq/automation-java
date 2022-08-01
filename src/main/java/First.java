@@ -18,7 +18,7 @@ public class First {
         double d = 10.5;
         double result = (i / d) * d + i;
         int resultInt = (int) (result % 15);
-        System.out.println(result);
-        System.out.println(resultInt);
+        System.out.println(resultInt + " " + result);//todo marchenko do something
+        System.out.println("How to push?");
     }
 }
