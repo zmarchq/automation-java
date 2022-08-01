@@ -14,11 +14,11 @@ public class First {
         long number = (long) (Integer.MAX_VALUE + 1) * 100;
         System.out.println("\nПочему значение стало отрицательным? " + number);
 
-        int i = 10;
+        int i = 10000;
         double d = 10.5;
         double result = (i / d) * d + i;
         int resultInt = (int) (result % 15);
-        System.out.println(result);
-        System.out.println(resultInt);
+      //  System.out.println(result);
+        System.out.println("Теперь хочу выводить в одной строке два значения: " + resultInt + ", " + result);
     }
 }
