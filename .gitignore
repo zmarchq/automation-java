@@ -1,1 +1,11 @@
-.gradle
+.gradle/
+.idea/
+*.log
+*.class
+build/
+target/
+
+out/
+
+.idea/**/gradle.xml
+.idea/**/libraries
