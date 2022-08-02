@@ -1,11 +1,8 @@
-.gradle/
-.idea/
+*.gradle/
+*.idea/
 *.log
 *.class
-build/
-target/
+*.build/
+*.target/
 
 out/
-
-.idea/**/gradle.xml
-.idea/**/libraries
