@@ -3,9 +3,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Keys;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import java.io.File;
+
+import static com.codeborne.selenide.Selenide.*;
 
 public class PracticeFormTest {
 
@@ -19,12 +21,23 @@ public class PracticeFormTest {
     @Test
     @DisplayName("Submit practice form")
     void firstTest() {
+        File file = new File("src/main/resources/test_data/Screenshot_3.png");
         open("/automation-practice-form");
         $("#firstName").setValue("Tester");
         $("#lastName").setValue("Tester");
+        $("#userEmail").setValue("tester@mail.com");
         $("label[for='gender-radio-3']").click();
         $("#userNumber").setValue("8913555555");
+        $("#subjectsInput").setValue("c");
+        $("#react-select-2-option-0").click();
+        $("label[for='hobbies-checkbox-1']").click();
+        $("#uploadPicture").uploadFile(file);
+        $("#currentAddress").setValue("Novosibirsk, Akadem 32/1");
+        $("#state").click();
+        $("#react-select-3-option-0").click();
+        $("#city").click();
+        $("#react-select-4-option-0").click();
         $("#submit").click();
-        Assertions.assertTrue($("#example-modal-sizes-title-lg").isDisplayed());
+        Assertions.assertTrue($("#example-modal-sizes-title-lg").isDisplayed(), "Modal-dialog is not displayed");
     }
 }
