@@ -15,6 +15,7 @@ public class HomeworkSelenide2Test {
         $(".HeaderMenu").$(Selectors.byText("Pricing")).hover();
         $(Selectors.byText("Compare plans")).click();
     }
+    
     @Test
     void dragAndDropTest() {
         open("https://the-internet.herokuapp.com/drag_and_drop");
