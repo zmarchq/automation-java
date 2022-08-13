@@ -10,8 +10,11 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'com.codeborne:selenide:6.6.6'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testImplementation(
+            'com.codeborne:selenide:6.6.6',
+            'org.junit.jupiter:junit-jupiter-api:5.8.1',
+            'org.slf4j:slf4j-api:1.7.25'
+    )
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
