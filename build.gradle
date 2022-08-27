@@ -11,9 +11,10 @@ repositories {
 
 dependencies {
     testImplementation(
-            'com.codeborne:selenide:6.6.6',
-            'org.junit.jupiter:junit-jupiter-api:5.8.1',
-            'org.slf4j:slf4j-api:1.7.25'
+            'com.codeborne:selenide:6.7.2',
+            'org.junit.jupiter:junit-jupiter-api:5.9.0',
+            'org.slf4j:slf4j-api:1.7.36',
+            'com.github.javafaker:javafaker:1.0.2'
     )
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }

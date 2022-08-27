@@ -2,7 +2,6 @@ package tests;
 
 import com.codeborne.selenide.*;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.interactions.Actions;
 
 import static com.codeborne.selenide.Selenide.*;
 
