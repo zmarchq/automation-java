@@ -1,0 +1,25 @@
+{
+  "name": "testJson",
+  "tests": [
+    "HomeworkSelenide1Test",
+    "HomeworkSelenide2Test",
+    "ParametrizedTest",
+    "ReadFilesTest",
+    "TestBase"
+  ],
+  "objects": {
+    "components": [
+      "DatePicker",
+      "Files",
+      "Table"
+    ],
+    "pages": [
+      "PracticeFormPage"
+    ],
+    "testData": [
+      "Company",
+      "UserTestData"
+    ]
+  },
+  "valid": true
+}
