@@ -51,6 +51,7 @@ public class AllureReportsTest {
         issuesPage.searchForRepository("eroshenkoam/allure-example");
         issuesPage.clickOnRepositoryLink("eroshenkoam/allure-example");
         issuesPage.openIssuesTab();
+        issuesPage.takeScreenshot();
         issuesPage.shouldSeeIssueWithNumber("С Новым Годом (2022)");
     }
 }
