@@ -12,8 +12,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class ParametrizedTest {
     @BeforeAll
@@ -40,6 +40,8 @@ public class ParametrizedTest {
     @ParameterizedTest(name = "Поле результата содержит имя {0}, почту {1}, адрес {2}")
     void textBoxTest(String name, String mail, String address){
         open("https://demoqa.com/text-box");
+        executeJavaScript("$('footer').remove()");
+        executeJavaScript("$('#fixedban').remove()");
         $("#userName").setValue(name);
         $("#userEmail").setValue(mail);
         $("#currentAddress").setValue(address);
