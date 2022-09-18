@@ -12,5 +12,6 @@ public class TestBase {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.timeout = 10000; //10 sec
         Configuration.browserSize = "1920x1080"; //Submit btn is not clickable without this configuration
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
 }
