@@ -28,33 +28,29 @@ public class Attach {
     public static String attachAsText(String attachName, String message) {
         return message;
     }
-
     public static void browserConsoleLogs() {
         attachAsText(
                 "Browser console logs",
                 String.join("\n", Selenide.getWebDriverLogs(LogType.BROWSER))
         );
     }
-
-    @Attachment(value = "video", type = "text/html", fileExtension = ".html")
+    @Attachment(value = "Video", type = "text/html", fileExtension = ".html")
     public static String addVideo() {
         return "<html><body><video width='100%' height='100%' controls autoplay><source src='"
-                + getVideoURL()
+                + getVideoUrl()
                 + "' type='video/mp4'></video></body></html>";
     }
-
-    public static URL getVideoURL() {
-        String videoUrl = "https://seleniod.autotests.cloud/video/" + getSessionId() + ".mp4";
+    public static URL getVideoUrl() {
+        String videoUrl = "https://selenoid.autotests.cloud/video/" + getSessionId() + ".mp4";
 
         try {
             return new URL(videoUrl);
-        } catch (MalformedURLException ex) {
-            ex.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
         return null;
     }
-
-    public static String getSessionId() {
+    public static String getSessionId(){
         return ((RemoteWebDriver) getWebDriver()).getSessionId().toString();
     }
 }
