@@ -1,4 +1,4 @@
-package components;
+package helpers;
 
 public class FileUtils {
     public static String getFileExtension(String fileName) {

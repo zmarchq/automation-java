@@ -1,12 +1,16 @@
 package tests;
 
 import com.codeborne.pdftest.PDF;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import com.codeborne.xlstest.XLS;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
-import components.FileUtils;
+import helpers.FileUtils;
 import entities.Project;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -23,12 +27,20 @@ import java.util.zip.ZipInputStream;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ReadFileUtilsTest {
-    ClassLoader classLoader = ReadFileUtilsTest.class.getClassLoader();
+public class ReadFilesTest {
+    ClassLoader classLoader = ReadFilesTest.class.getClassLoader();
     Path testFile = Paths.get("src/test/resources/zipTest.zip");
+
+    @BeforeAll
+    static void tearUp() {
+        Configuration.timeout = 10000; //10 sec
+        Configuration.browserSize = "1920x1080"; //Submit btn is not clickable without this configuration
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+    }
 
     @Test
     void readCsvFromZip() throws IOException, CsvException {
+        SelenideLogger.addListener("allure", new AllureSelenide());
         try (ZipInputStream zis = new ZipInputStream(Files.newInputStream(testFile));
              CSVReader csvReader = new CSVReader(new InputStreamReader(zis, UTF_8))) {
             ZipEntry entry;
