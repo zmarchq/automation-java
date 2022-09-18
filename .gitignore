@@ -3,6 +3,7 @@ CRD1CvsQtGoDMALTyeYiiOSXOpaTeXSVNnowElmPVSSSHY86GISGitCoqGPGGWTVimQMLHOLAdazigHS
  
 # Compiled class file
 *.class
+*.idea
 
 # Log file
 *.log

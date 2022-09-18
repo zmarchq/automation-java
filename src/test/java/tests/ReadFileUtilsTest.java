@@ -5,13 +5,16 @@ import com.codeborne.xlstest.XLS;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
-import components.Files;
+import components.FileUtils;
 import entities.Project;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 import java.util.zip.ZipEntry;
@@ -20,17 +23,17 @@ import java.util.zip.ZipInputStream;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ReadFilesTest {
-    ClassLoader classLoader = ReadFilesTest.class.getClassLoader();
-    final String FILE = "zipTest.zip";
+public class ReadFileUtilsTest {
+    ClassLoader classLoader = ReadFileUtilsTest.class.getClassLoader();
+    Path testFile = Paths.get("src/test/resources/zipTest.zip");
 
     @Test
     void readCsvFromZip() throws IOException, CsvException {
-        try (ZipInputStream zis = new ZipInputStream(Objects.requireNonNull(classLoader.getResourceAsStream(FILE)));
+        try (ZipInputStream zis = new ZipInputStream(Files.newInputStream(testFile));
              CSVReader csvReader = new CSVReader(new InputStreamReader(zis, UTF_8))) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
-                if (Files.getFileExtension(entry.getName()).equals("csv")) {
+                if (FileUtils.getFileExtension(entry.getName()).equals("csv")) {
                     List<String[]> result = csvReader.readAll();
                     assertThat(result).contains(
                             new String[]{"teacher", "lesson", "date"},
@@ -43,10 +46,10 @@ public class ReadFilesTest {
 
     @Test
     void readPdfFromZip() throws IOException {
-        try (ZipInputStream zis = new ZipInputStream(Objects.requireNonNull(classLoader.getResourceAsStream(FILE)))) {
+        try (ZipInputStream zis = new ZipInputStream(Files.newInputStream(testFile))) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
-                if (Files.getFileExtension(entry.getName()).equals("pdf")) {
+                if (FileUtils.getFileExtension(entry.getName()).equals("pdf")) {
                     PDF pdf = new PDF(zis.readAllBytes());
                     assertThat(pdf.text).contains(
                             "Сертифицированный тестировщик",
@@ -60,10 +63,10 @@ public class ReadFilesTest {
 
     @Test
     void readExcelFromZip() throws IOException {
-        try (ZipInputStream zis = new ZipInputStream(Objects.requireNonNull(classLoader.getResourceAsStream(FILE)))) {
+        try (ZipInputStream zis = new ZipInputStream(Files.newInputStream(testFile))) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
-                if (Files.getFileExtension(entry.getName()).equals("xls")) {
+                if (FileUtils.getFileExtension(entry.getName()).equals("xls")) {
                     XLS xls = new XLS(zis.readAllBytes());
                     assertThat(
                             xls.excel.getSheetAt(0)
