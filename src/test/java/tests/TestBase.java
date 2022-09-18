@@ -16,7 +16,7 @@ public class TestBase {
     }
 
     @AfterEach
-    static void addAttach() {
+    void addAttach() {
         Attach.screenshotAs("LastScreenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
