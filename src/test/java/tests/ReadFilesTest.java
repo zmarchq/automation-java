@@ -36,11 +36,11 @@ public class ReadFilesTest {
         Configuration.timeout = 10000; //10 sec
         Configuration.browserSize = "1920x1080"; //Submit btn is not clickable without this configuration
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        SelenideLogger.addListener("allure", new AllureSelenide());
     }
 
     @Test
     void readCsvFromZip() throws IOException, CsvException {
-        SelenideLogger.addListener("allure", new AllureSelenide());
         try (ZipInputStream zis = new ZipInputStream(Files.newInputStream(testFile));
              CSVReader csvReader = new CSVReader(new InputStreamReader(zis, UTF_8))) {
             ZipEntry entry;
