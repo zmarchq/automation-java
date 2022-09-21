@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.*;
 
-public class HomeworkSelenide2Test {
+public class HomeworkSelenide2Test extends TestBase {
 
     @Test
     void hoverTest() {

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.*;
 import static com.codeborne.selenide.Selectors.byLinkText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class HomeworkSelenide1Test {
+public class HomeworkSelenide1Test extends TestBase {
     /**
      * h1 div найдёт все элементы, совпадающие с данным локатором и вернёт первый подходящий
      * $("h1").$("div") найдет первый h1 и в нём будет искать div.

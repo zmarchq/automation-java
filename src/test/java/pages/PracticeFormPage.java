@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class PracticeFormPage {
 
     public PracticeFormPage openPage() {
-        open("/automation-practice-form");
+        open("https://demoqa.com/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         executeJavaScript("$('footer').remove()");
         executeJavaScript("$('#fixedban').remove()");

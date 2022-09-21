@@ -11,13 +11,14 @@ import pages.IssuesPage;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static io.qameta.allure.Allure.step;
 import static org.openqa.selenium.By.linkText;
 
-public class AllureReportsTest {
+public class AllureReportsTest extends TestBase {
+    final String ISSUE = "С Новым Годом (2022)";
 
     @Test
     public void listenerTest() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
         open("https://github.com");
         $(".header-search-input").click();
         $(".header-search-input").sendKeys("eroshenkoam/allure-example");
@@ -32,7 +33,6 @@ public class AllureReportsTest {
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Создание Issue для авторизованного пользователя")
     public void tagsTest() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
         open("https://github.com");
         $(".header-search-input").click();
         $(".header-search-input").sendKeys("eroshenkoam/allure-example");
@@ -44,7 +44,6 @@ public class AllureReportsTest {
 
     @Test
     void stepsTest() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
         IssuesPage issuesPage = new IssuesPage();
 
         issuesPage.openMainPage();
@@ -53,5 +52,22 @@ public class AllureReportsTest {
         issuesPage.openIssuesTab();
         issuesPage.takeScreenshot();
         issuesPage.shouldSeeIssueWithNumber("С Новым Годом (2022)");
+    }
+
+    @Test
+    void lambdaTest() {
+        step("Открыть главную страницу", () -> open("https://github.com"));
+        step("Открыть проект", () -> {
+            $(".header-search-input").click();
+            $(".header-search-input").sendKeys("eroshenkoam/allure-example");
+            $(".header-search-input").submit();
+        });
+        step("Открыть таб Issues", () -> {
+            $(linkText("eroshenkoam/allure-example")).click();
+            $("#issues-tab").click();
+        });
+        step("Проверить наличие issue с текстом " + ISSUE, () -> {
+            $(withText(ISSUE)).should(Condition.exist);
+        });
     }
 }
