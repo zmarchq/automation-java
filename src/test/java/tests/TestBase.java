@@ -17,8 +17,8 @@ public class TestBase {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(VNC, Boolean.valueOf(System.getProperty(VNC)));
-        capabilities.setCapability(VIDEO, System.getProperty(VIDEO));
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", true);
 
         Configuration.browserCapabilities = capabilities;
         Configuration.timeout = 10000; //10 sec
