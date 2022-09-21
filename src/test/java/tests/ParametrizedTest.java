@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
-public class ParametrizedTest {
+public class ParametrizedTest extends TestBase {
     @BeforeAll
     static void tearUp() {
         Configuration.timeout = 10000; //10 sec

@@ -9,20 +9,22 @@ import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class TestBase {
+    final static String VNC = "enableVNC";
+    final static String VIDEO = "enableVideo";
 
     @BeforeAll
     static void tearUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
+        capabilities.setCapability(VNC, System.getProperty(VNC));
+        capabilities.setCapability(VIDEO, System.getProperty(VIDEO));
 
         Configuration.browserCapabilities = capabilities;
-        Configuration.baseUrl = "https://demoqa.com";
         Configuration.timeout = 10000; //10 sec
-        Configuration.browserSize = "1920x1080"; //Submit btn is not clickable without this configuration
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.browserSize = System.getProperty("browserSize"); //Submit btn is not clickable without this configuration
+        Configuration.remote = System.getProperty("remote"); //"https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.browserVersion = System.getProperty("browserVersion");
     }
 
     @AfterEach
