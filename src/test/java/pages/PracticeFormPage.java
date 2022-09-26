@@ -1,7 +1,7 @@
 package pages;
 
 import components.DatePicker;
-import components.Table;
+import collections.Table;
 
 import java.io.File;
 
@@ -85,6 +85,6 @@ public class PracticeFormPage {
 
     public Table submit() {
         $("#submit").click();
-        return new Table();
+        return new Table($("table"));
     }
 }
