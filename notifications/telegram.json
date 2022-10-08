@@ -1,0 +1,16 @@
+{
+  "base": {
+    "project": "learn-auto-guru",
+    "environment": "qa_guru",
+    "comment": "test_run@zhanna",
+    "reportLink": "",
+    "language": "en",
+    "allureFolder": "build/reports/allure-report/allureReport",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "5705242309:AAHYc2tFZjyfV1_fX-9LS07X_qjLZ-aMJq4",
+    "chat": "-1001163272247",
+    "replyTo": ""
+  }
+}
