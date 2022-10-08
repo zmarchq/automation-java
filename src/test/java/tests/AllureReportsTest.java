@@ -1,10 +1,9 @@
 package tests;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.*;
-import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.IssuesPage;
 
@@ -55,6 +54,7 @@ public class AllureReportsTest extends TestBase {
     }
 
     @Test
+    @Tag("property")
     void lambdaTest() {
         step("Открыть главную страницу", () -> open("https://github.com"));
         step("Открыть проект", () -> {
