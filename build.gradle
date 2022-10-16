@@ -42,7 +42,8 @@ dependencies {
             'org.assertj:assertj-core:3.23.1',
             'com.codeborne:xls-test:1.4.3',
             'com.fasterxml.jackson.core:jackson-databind:2.13.4',
-            'io.qameta.allure:allure-selenide:2.19.0'
+            'io.qameta.allure:allure-selenide:2.19.0',
+            'io.rest-assured:rest-assured:5.2.0'
     )
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
 }
@@ -60,5 +61,11 @@ tasks.withType(Test) {
         lifecycle {
             events "started", "skipped", "failed", "standard_error", "standard_out"
         }
+    }
+}
+
+task homework(type: Test) {
+    useJUnitPlatform {
+        includeTags "homework"
     }
 }
