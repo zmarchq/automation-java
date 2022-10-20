@@ -25,7 +25,8 @@ public class UserTestData {
             hobby = setHobby(),
             state = setState(),
             city = setCity(),
-            stateAndCity = state + " " + city;
+            stateAndCity = state + " " + city,
+            password = String.valueOf(faker.random().nextInt(111111, 999999));
 
 
     public static File avatar = new File("src/main/resources/test_data/Screenshot_3.png");

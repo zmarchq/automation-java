@@ -69,3 +69,9 @@ task homework(type: Test) {
         includeTags "homework"
     }
 }
+
+task demotest(type: Test) {
+    useJUnitPlatform {
+        includeTags "demoTest"
+    }
+}
