@@ -15,7 +15,7 @@ public class HomeworkSelenide1Test extends TestBase {
      */
 
     @BeforeAll
-    static void tearUp() {
+     void tearUp() {
         Configuration.baseUrl = "https://github.com";
         Configuration.timeout = 10000; //10 sec
     }
