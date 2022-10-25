@@ -17,7 +17,7 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class ParametrizedTest extends TestBase {
     @BeforeAll
-    static void tearUp() {
+    void tearUp() {
         Configuration.timeout = 10000; //10 sec
         Configuration.browserSize = "1920x1080";
     }
