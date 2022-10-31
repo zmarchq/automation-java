@@ -2,9 +2,13 @@ package owner;
 
 import org.aeonbits.owner.Config;
 
+@Config.LoadPolicy(Config.LoadType.MERGE)
+@Config.Sources({
+        "system:properties",
+        "classpath:${env}.properties"
+})
 public interface WebDriverConfig extends Config{
     @Key("browser")
-    @DefaultValue("FIREFOX")
     String getBrowser();
 
     @Key("remoteUrl")
@@ -14,10 +18,11 @@ public interface WebDriverConfig extends Config{
     String browserVersion();
 
     @Key("browserSize")
-    @DefaultValue("1920x1080")
     String browserSize();
 
     @Key("timeout")
-    @DefaultValue("10000")
     int timeout();
+
+    @Key("isRemote")
+    boolean isRemote();
 }

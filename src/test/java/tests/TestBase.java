@@ -8,37 +8,30 @@ import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import owner.ConfigReader;
 import owner.WebDriverConfig;
 
-import java.util.function.Supplier;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TestBase {
 
-    private final WebDriverConfig config;
-
-    public TestBase() {
-        config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
-    }
+    private final WebDriverConfig config = ConfigReader.Instance.read();
 
     @BeforeAll
     void tearUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-
-        if (config.getRemoteUrl() != null) {
+        Configuration.timeout = config.timeout(); //10 sec
+        Configuration.browser = config.getBrowser();
+        Configuration.browserSize = config.browserSize();
+        Configuration.browserVersion = config.browserVersion();
+        if (config.isRemote()) {
             Configuration.remote = config.getRemoteUrl();
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", true);
             Configuration.browserCapabilities = capabilities;//"https://user1:1234@selenoid.autotests.cloud/wd/hub";
         }
-
-        Configuration.timeout = config.timeout(); //10 sec
-        Configuration.browser = config.getBrowser();
-        Configuration.browserSize = config.browserSize();
-        Configuration.browserVersion = config.browserVersion();
     }
 
     @AfterEach

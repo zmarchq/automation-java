@@ -19,6 +19,6 @@ public class WebDriverTest extends TestBase {
     @Tag("Owner")
     void testGitHub() {
         String title = step("Получить заголовок страницы", () -> WebDriverRunner.getWebDriver().getTitle());
-        Assertions.assertEquals("GitHub: Where the world builds software · GitHub", title, "Заголовки не совпадают!");
+        Assertions.assertEquals("GitHub: Let’s build from here · GitHub", title, "Заголовки не совпадают!");
     }
 }
