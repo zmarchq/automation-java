@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id "io.qameta.allure" version "2.9.6"
+    id "io.freefair.lombok" version "6.0.0-m2"
 }
 
 group 'org.example'
@@ -33,6 +34,8 @@ compileTestJava {
 
 dependencies {
     testImplementation(
+            'org.projectlombok:lombok:1.14.8',
+            'io.qameta.allure:allure-rest-assured:2.19.0',
             'com.codeborne:selenide:6.7.3',
             'org.junit.jupiter:junit-jupiter:5.9.0',
             'org.slf4j:slf4j-api:2.0.0',

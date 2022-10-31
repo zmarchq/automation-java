@@ -1,94 +1,106 @@
 package tests;
 
+import com.codeborne.pdftest.assertj.Assertions;
+import models.*;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static io.restassured.RestAssured.*;
-import static org.hamcrest.core.Is.is;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatList;
+import static specs.Specifications.*;
+import static testData.UserTestData.*;
 
 public class SelenoidApiTest {
-
     @Test
     @Tag("homework")
     void listUsersTest() {
-        given()
-                .log().all()
-                .when()
-                .get("https://reqres.in/api/users")
+        UserListResponse userListResponse = given()
+                .spec(request)
+                .get("/users")
                 .then()
-                .log().all()
-                .statusCode(200);
+                .spec(response200)
+                .extract().body().as(UserListResponse.class);
+
+        assertThatList(userListResponse.getData()).doesNotContainNull();
     }
 
     @Test
     @Tag("homework")
     void singleUserTest() {
-        given()
-                .log().all()
-                .when()
-                .get("https://reqres.in/api/user/2")
+       UserResponse userResponse =  given()
+                .spec(request)
+                .get("/user/2")
                 .then()
-                .log().all()
-                .body("data.id", is(2));
+                .spec(response200)
+               .extract().body().as(UserResponse.class);
+
+
+       assertThat(userResponse.getSupport().getText())
+               .isEqualTo
+                       ("To keep ReqRes free, " +
+                               "contributions towards server " +
+                               "costs are appreciated!");
     }
 
     @Test
     @Tag("homework")
     void createUserTest() {
-        given()
-                .log().all()
-                .body("{\n" +
-                        "    \"name\": \"zhanna\",\n" +
-                        "    \"job\": \"guru\"\n" +
-                        "}")
-                .when()
-                .post("https://reqres.in/api/users")
+        UserData userData = new UserData();
+        userData.setJob("guru");
+        userData.setName("zhanna");
+        UserData response = given()
+                .spec(request)
+                .body(userData)
+                .post("/users")
                 .then()
-                .log().all()
-                .statusCode(201);
+                .spec(response201)
+                .extract().body().as(UserData.class);
+
+        var simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String expectedDate = simpleDateFormat.format(new Date());
+        Assertions.assertThat(response.getCreatedAt()).contains(expectedDate);
     }
 
     @Test
     void updateUserTest() {
-        given()
-                .log().all()
-                .body("{\n" +
-                        "    \"name\": \"update\",\n" +
-                        "    \"job\": \"guru\"\n" +
-                        "}")
-                .when()
-                .put("https://reqres.in/api/user/2")
+        UserData userData = new UserData();
+        userData.setName(fullname);
+        userData.setJob(hobby);
+       UserData response = given()
+                .spec(request)
+                .body(userData)
+                .put("/user/2")
                 .then()
-                .log().all()
-                .statusCode(200);
+                .spec(response200)
+               .extract().body().as(UserData.class);
+
+        var simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String expectedDate = simpleDateFormat.format(new Date());
+        assertThat(response.getUpdatedAt()).contains(expectedDate);
     }
 
     @Test
     void unsuccessfulRegisterTest() {
-        given()
-                .log().all()
-                .body("{\n" +
-                        "    \"email\": \"qa.guru@reqres.in\",\n" +
-                        "    \"password\": \"test1111\"\n" +
-                        "}")
+        AuthBody authBody = new AuthBody();
+        authBody.setEmail(email);
+        authBody.setPassword(password);
+        AuthResponse response = given()
+                .spec(request)
+                .body(authBody)
                 .when()
-                .post("https://reqres.in/api/register")
+                .post("/register")
                 .then()
-                .log().body()
-                .statusCode(400)
-                .body("error", is("Missing email or username"));
-    }
+                .spec(response400)
+                .extract().response().as(AuthResponse.class);
 
-    @Test
-    @Tag("example")
-    void checkTotal() {
-        given()
-                .log().all()
-                .when()
-                .get("https://selenoid.autotests.cloud/status")
-                .then()
-                .log().all()
-                .statusCode(200)
-                .body("total", is((20)));
+        assertThat(
+                response.getError())
+                .isEqualTo(
+                        "Note: Only defined users " +
+                                "succeed registration");
     }
 }
