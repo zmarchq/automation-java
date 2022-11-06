@@ -16,14 +16,14 @@ public class Specifications {
     public static RequestSpecification request = with()
             .filter(customAllureFilter)
             .baseUri(BASE_URI)
-            .log().uri()
-            .log().body()
+            .log().all()
             .contentType(ContentType.JSON);
 
     public static ResponseSpecification response200 = with()
             .filter(customAllureFilter)
-            .expect().statusCode(200)
-            .log().all();
+            .log().all()
+            .expect().statusCode(200);
+
 
     public static ResponseSpecification response201 = with()
             .filter(customAllureFilter)

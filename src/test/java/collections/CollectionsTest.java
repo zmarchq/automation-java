@@ -8,8 +8,8 @@ import pages.PracticeFormPage;
 
 import java.util.stream.Stream;
 
-import static testData.UserTestData.*;
-import static testData.UserTestData.city;
+import static testdata.UserTestData.*;
+import static testdata.UserTestData.city;
 
 public class CollectionsTest {
     PracticeFormPage formPage = new PracticeFormPage();
