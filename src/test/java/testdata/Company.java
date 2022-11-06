@@ -1,4 +1,4 @@
-package testData;
+package testdata;
 
 import java.util.List;
 

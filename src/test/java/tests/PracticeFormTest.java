@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
 
-import static testData.UserTestData.*;
+import static testdata.UserTestData.*;
 
 public class PracticeFormTest extends TestBase {
     PracticeFormPage formPage = new PracticeFormPage();

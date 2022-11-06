@@ -2,9 +2,7 @@ package helpers;
 
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
-import io.restassured.http.Cookie;
-import io.restassured.http.Cookies;
-import testData.UserTestData;
+import testdata.UserTestData;
 
 import java.util.HashMap;
 import java.util.Map;
