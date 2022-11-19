@@ -11,7 +11,7 @@ public class PracticeFormTest extends TestBase {
     PracticeFormPage formPage = new PracticeFormPage();
 
     @Test
-    @Tag("property")
+    @Tag("practiceForm")
     @DisplayName("Submit practice form")
     void firstTest() {
         formPage.openPage()

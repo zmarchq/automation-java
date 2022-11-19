@@ -1,6 +1,7 @@
 package collections;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -77,11 +78,13 @@ public class Table {
         return this;
     }
 
+    @Step("Проверить заголовок таблицы")
     public Table checkTitle(String title) {
         $("#example-modal-sizes-title-lg").shouldHave(text(title));
         return this;
     }
 
+    @Step("Проверить, что значение в поле {key} равно {value}")
     public Table checkValues(String key, String value) {
         $(".table").$(byText(key)).sibling(0).shouldHave(text(value));
         return this;

@@ -1,4 +1,4 @@
-package components;
+package entities.components;
 
 import static com.codeborne.selenide.Selenide.$;
 
