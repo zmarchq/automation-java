@@ -70,7 +70,7 @@ tasks.withType(Test) {
 
 task homework(type: Test) {
     useJUnitPlatform {
-        includeTags "Owner"
+        includeTags "practiceForm"
     }
     systemProperties(System.getProperties())
 }
